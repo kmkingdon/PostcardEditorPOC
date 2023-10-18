@@ -1,3 +1,4 @@
+//TO DO: Import supported types from Libraries instead Layout[]
 export type LayoutItem = { 
     i: string, 
     x: number, 

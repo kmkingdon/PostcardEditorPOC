@@ -1,8 +1,42 @@
-# Getting Started with Create React App
+# Postcard Editor POC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+POC quick build focusing on a Postcard Editor experience. 
 
-## Available Scripts
+## DEMO
+
+
+## POC Functionality
+
+**WYSIWYG Page Layout**: Responsive layout page allowing users to see difference between different size postcards, outside margins, and overall background color.
+
+**Add Images**: Add image elements to postcard. In a Production application, this would tie to the user's image API. Once an image is added, the user can not add the same image again. 
+
+**Add Text**: Add text elements to postcard. In a Production application, this would tie to the user's image API.
+
+**Move, Resize, and Rearrange Elements**: Users can move images and text around the postcard, resize elements, and rearrange element layers. 
+
+**Remove Elements**: Users can remove image and text elements from the postcard. 
+
+
+## Next Steps
+
+1. User Journey Experience Improvements and Additional Functionality 
+- **Images**- Continue to add functionality like locking Aspect ratios. 
+- **Text**- Add style functionality to adjust text size, font style, font type, etc. Connect text style and value to redux config state. 
+- **Resize and Elemement Buttons**- Show resize and Delete/Rearrange buttons on hover or selection. 
+- **Address Defects**- Address defects like the 'readOnly' Typeerror caused by rage clicking on an element. Test for and address additional defects. 
+
+2. Performance: Improve overall App and GridLayout performance. In particular, the Grid Layout is re-rendering whenever the layout changes. Optimizations could improve the number of re-renders and help support larger scale projects like multi-page books. 
+
+3. Project Config: Project configs could be saved to enable opening projects later. The config will also need to work for printing. The final "postcard" or project will need to be in a format that is accepted by the printers (ie. PDF, JPEG, etc). The configuration should be shared between the FE editor and the service that creates the print version. 
+
+4. Quality: Add unit and component jests tests.
+
+
+
+## Running Locally
+
+Clone project, enter project directory, and install node_modules.
 
 In the project directory, you can run:
 
@@ -14,33 +48,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
