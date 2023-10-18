@@ -50,8 +50,8 @@ const background = backgroundColor || '#ffffff';
 const {height, width} = calculateHeightWidth(pageSize, marginSize)
 
   return (
-    <Grid container  display='flex' >
-        <Grid item id="pageBackground" sx={{width:'100%', height:'100vh', backgroundColor: 'rgb(189,199,203)'}} display="flex" justifyContent="center" alignItems="center">
+    <Grid container  display='flex'>
+        <Grid item id="pageBackground" sx={{width:'100%', height:'calc(100vh - 48px)', backgroundColor: 'rgb(189,199,203)', overflow:'scroll'}} display="flex" justifyContent="center" alignItems="center">
             <Grid item id="page" sx={{width:pageSize.width, height:pageSize.height, backgroundColor: background}}>
                 <Grid item id="outsidemMargin" sx={{ height: '100%', padding: marginSize}}>
                    <GridContainer height={height} width={width}/>
