@@ -16,8 +16,13 @@ type GridContainerParams = {
 }
 
 //export for unit testing
+export const findIndex = (layout: LayoutItem[], elementId: string) => {
+    return layout.findIndex((i) => i.i === elementId);
+}
+
+
 export const createUpdatedLayout = (layout: LayoutItem[], elementId: string, newElement: null | LayoutItem) => {
-    const index = layout.findIndex((i) => i.i === elementId);
+    const index = findIndex(layout, elementId)
     const updatedLayout = [...layout]
     if(newElement){
       // newElement defined, update layoutItem
@@ -42,6 +47,7 @@ function GridContainer(params: GridContainerParams) {
 
    const updateLayout = (layout:LayoutItem[]) => {
         // prevent double call of updateLayout after deletion
+        console.log({layout, localLayout, equal: isEqaul(layout, localLayout)})
         if(!isEqaul(layout, localLayout)){
             dispatch(updateLayoutConfig(layout))
         }
@@ -57,6 +63,19 @@ function GridContainer(params: GridContainerParams) {
    const handleMove = (item:LayoutItem[]) => {
         const elementId = item[0].i;
         const updatedLayout = createUpdatedLayout(layout, elementId, item[0])
+        setLocalLayout(updatedLayout)
+        dispatch(updateLayoutConfig(updatedLayout))
+   }
+
+   const handleRearrange = (elementId:string, forward:boolean) => {
+        const index = findIndex(layout, elementId);
+        const updatedLayout = [...layout];
+
+        //remove old element and add at new index
+        const elem = updatedLayout.splice(index, 1)[0];
+        const newIndex = forward ? index + 1 : index - 1;
+        updatedLayout.splice(newIndex, 0, elem );
+
         setLocalLayout(updatedLayout)
         dispatch(updateLayoutConfig(updatedLayout))
    }
@@ -79,7 +98,7 @@ function GridContainer(params: GridContainerParams) {
             const source = imageList.find((i) => i.id === item.i );
             return (
             <Grid key={item.i} sx={{minWidth: 100, minHeight: 100}}>
-                <GridItemMenu handleDelete={handleDelete} elementId={item.i}>
+                <GridItemMenu handleDelete={handleDelete} handleRearrange={handleRearrange} elementId={item.i}>
                    <img width="100%" src={source?.img} alt={source?.title}/>
                 </GridItemMenu>
             </Grid>
