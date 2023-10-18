@@ -1,16 +1,19 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
+import { LayoutItem } from '../../common/types';
 
 export interface ConfigState {
   size: string | null;
   margin: string | null;
   backgroundColor: string | null;
+  layout: any[];
 }
 
 const initialState: ConfigState = {
   size: null,
   margin: null,
   backgroundColor: null,
+  layout: []
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -41,10 +44,21 @@ export const configSlice = createSlice({
     setBackgroundColorConfig: (state, action: PayloadAction<string>) => {
         state.backgroundColor = action.payload;
     },
+    addImageToLayoutConfig: (state, action: PayloadAction< {
+        img: string;
+        title: string;
+        id: string;
+    }>) => {
+        const layoutItem = { i: action.payload.id, x: 0, y: 0, w: 2, h: 2, isBounded: true, isResizeable: true};
+        state.layout = [...state.layout, layoutItem];
+    },
+    updateLayoutConfig: (state, action: PayloadAction<LayoutItem[]>) => {
+        state.layout = [...action.payload];
+    },
   },
 });
 
-export const { setSizeConfig, setMarginConfig, setBackgroundColorConfig} = configSlice.actions;
+export const { setSizeConfig, setMarginConfig, setBackgroundColorConfig, addImageToLayoutConfig, updateLayoutConfig} = configSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -52,6 +66,7 @@ export const { setSizeConfig, setMarginConfig, setBackgroundColorConfig} = confi
 export const selectSize = (state: RootState) => state.config.size;
 export const selectMargin = (state: RootState) => state.config.margin;
 export const selectBackgroundColor = (state: RootState) => state.config.backgroundColor;
+export const selectLayout = (state: RootState) => state.config.layout;
 
 
 export default configSlice.reducer;

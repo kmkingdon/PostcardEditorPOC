@@ -32,7 +32,7 @@ function  ColorPicker(params: ColorPickerParams) {
   const [hex, setHex] = useState(backgroundColor || "#ffffff");
 
   return (
-    <Grid display="flex" justifyContent="center" alignItems="center" sx={{mt:2}}>
+    <Grid display="flex" justifyContent="center" alignItems="center">
         <Button aria-describedby={id} variant="contained" onClick={handleClick} sx={{ backgroundColor: hex, width: '50px', height: '30px', ...hoverButtonSX}} />
         <Popover
             id={id}

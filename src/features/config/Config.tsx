@@ -3,6 +3,8 @@ import { Autocomplete, Divider, Grid, TextField, Typography } from '@mui/materia
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectBackgroundColor, selectMargin, selectSize, setBackgroundColorConfig, setMarginConfig, setSizeConfig } from './configSlice';
 import ColorPicker from './ColorPicker';
+import PhotoGallery from './PhotoGallery';
+
 
 const postcardSizes = {
     "4.2'' X 5.5''": "4.2'' X 5.5''",
@@ -51,7 +53,7 @@ function  Config() {
   }, [])
 
   return (
-    <Grid container  display="flex" flexDirection="column" sx={{width:'100%', height:'100vh', borderLeft: '1px solid grey'}}>
+    <Grid container  display="flex" flexDirection="column" flexWrap="nowrap" sx={{width:'100%', height:'100vh', borderLeft: '1px solid grey', overflowY: 'scroll', overflowX: 'hidden'}}>
         <Grid item display="flex" justifyContent="center" alignItems="center" sx={{mt:2}}>        
             <Typography color='grey' variant="h6">Postcard Editor POC</Typography>
         </Grid>
@@ -86,6 +88,11 @@ function  Config() {
             <Typography color='grey' variant="body1">Background Color</Typography>
         </Grid>
         <ColorPicker backgroundColor={backgroundColor} setBackgroundColor={setBackgroundColor}/>
+        <Divider sx={{m:1}}/>
+        <Grid item display="flex" justifyContent="flex-start" alignItems="center" sx={{mt:1, ml: 3}}>        
+            <Typography color='grey' variant="body1">Images</Typography>
+        </Grid>
+        <PhotoGallery />
     </Grid>
   );
 }
