@@ -1,15 +1,23 @@
-import { Grid, IconButton, ImageList, ImageListItem, Popover } from '@mui/material';
+import { Grid, IconButton, ImageList, ImageListItem } from '@mui/material';
 import { Add } from '@mui/icons-material';
 
 
 import photos from '../../common/photos.json';
-import { useAppDispatch } from '../../app/hooks';
-import { addImageToLayoutConfig } from './configSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { addImageToLayoutConfig, selectLayout } from './configSlice';
 
 
 function  PhotoGallery() {
   const imageList = photos.images;
   const dispatch = useAppDispatch();
+
+  const layout= useAppSelector(selectLayout);
+
+  const determineIfDisabled = (elementId:string) => {
+    const index = layout.findIndex(i => i.i === elementId);
+    //return true if element exists in layout already
+    return index >= 0
+  }
 
   return (
     <Grid container display="flex" justifyContent="center" alignItems="center" sx={{ml:2, mr:2}}>
@@ -22,7 +30,7 @@ function  PhotoGallery() {
                         alt={item.title}
                         loading="lazy"
                     />
-                    <IconButton onClick={()=>{dispatch(addImageToLayoutConfig(item))}}sx={{position:'absolute', top: '0', left: '0', backgroundColor:'#ffffff'}}>
+                    <IconButton onClick={()=>{dispatch(addImageToLayoutConfig(item))}} disabled={determineIfDisabled(item.id)} sx={{position:'absolute', top: '0', left: '0', backgroundColor:'#ffffff'}}>
                         <Add sx={{ fontSize: 10 }}/>
                     </IconButton>
                 </ImageListItem>

@@ -54,7 +54,7 @@ export const configSlice = createSlice({
     },
     updateLayoutConfig: (state, action: PayloadAction<LayoutItem[]>) => {
         state.layout = [...action.payload];
-    },
+    }
   },
 });
 
