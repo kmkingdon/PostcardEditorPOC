@@ -49,4 +49,9 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 
+## Library Integrations
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+
+- Component Library: [MaterialUI](https://mui.com/)
+- React Grid/Canvas: [React Grid Layout](https://github.com/react-grid-layout/react-grid-layout)
