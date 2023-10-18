@@ -7,16 +7,16 @@ function GridItemMenu(props: { handleDelete:(elementId:string)=>void, handleRear
 
   return (
     <Grid display='flex' sx={{width: '100%', height: '100%'}}>
-        <Grid sx={{position:'absolute', top:0, left:0}}>
+        <Grid sx={{position:'absolute', top:0, left:0, zIndex: 100}}>
             <ButtonGroup className=".showOnHover" orientation="vertical" sx={{p:1}}>
                 <IconButton onClick={()=> props.handleDelete(props.elementId)}>
-                    <Delete sx={{fontSize: 15, color:"#ffffff"}} />
+                    <Delete sx={{fontSize: 15, color:"grey"}} />
                 </IconButton>
                 <IconButton onClick={()=> props.handleRearrange(props.elementId, true)}>
-                    <FlipToFront sx={{fontSize: 15, color:"#ffffff"}} />
+                    <FlipToFront sx={{fontSize: 15, color:"grey"}} />
                 </IconButton>
                 <IconButton onClick={()=> props.handleRearrange(props.elementId, false)}>
-                    <FlipToBack sx={{fontSize: 15, color:"#ffffff"}} />
+                    <FlipToBack sx={{fontSize: 15, color:"grey"}} />
                 </IconButton>
             </ButtonGroup>
         </Grid>

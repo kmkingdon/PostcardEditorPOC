@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 import { RootState, AppThunk } from '../../app/store';
 import { LayoutItem } from '../../common/types';
+import { ELEMENT_TYPES } from '../../common/constants'
+
 
 export interface ConfigState {
   size: string | null;
@@ -49,8 +52,12 @@ export const configSlice = createSlice({
         title: string;
         id: string;
     }>) => {
-        const layoutItem = { i: action.payload.id, x: 0, y: 0, w: 2, h: 2, isBounded: true, isResizeable: true};
+        const layoutItem = { i: action.payload.id, x: 0, y: 0, w: 2, h: 2, isBounded: true, isResizeable: true, type: ELEMENT_TYPES.IMAGE};
         state.layout = [...state.layout, layoutItem];
+    },
+    addTextToLayoutConfig: (state) => {
+        const textItem = { i: `TEXT-${uuidv4()}`, x: 0, y: 0, w: 2, h: 2, isBounded: true, isResizeable: true, type: ELEMENT_TYPES.TEXT};
+        state.layout = [...state.layout, textItem];
     },
     updateLayoutConfig: (state, action: PayloadAction<LayoutItem[]>) => {
         state.layout = [...action.payload];
@@ -58,7 +65,7 @@ export const configSlice = createSlice({
   },
 });
 
-export const { setSizeConfig, setMarginConfig, setBackgroundColorConfig, addImageToLayoutConfig, updateLayoutConfig} = configSlice.actions;
+export const { setSizeConfig, setMarginConfig, setBackgroundColorConfig, addImageToLayoutConfig, updateLayoutConfig, addTextToLayoutConfig} = configSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

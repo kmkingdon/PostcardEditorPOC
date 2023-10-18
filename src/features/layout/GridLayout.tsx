@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import GridLayout from "react-grid-layout";
+import Textarea from '@mui/joy/Textarea';
 import { useState } from "react";
 import isEqaul from "lodash/isEqual"
 
@@ -8,6 +9,7 @@ import { selectLayout, updateLayoutConfig } from "../config/configSlice";
 import photos from '../../common/photos.json';
 import { LayoutItem } from "../../common/types";
 import GridItemMenu from "./GridItemMenu";
+import { ELEMENT_TYPES } from "../../common/constants";
 
 
 type GridContainerParams = {
@@ -47,7 +49,6 @@ function GridContainer(params: GridContainerParams) {
 
    const updateLayout = (layout:LayoutItem[]) => {
         // prevent double call of updateLayout after deletion
-        console.log({layout, localLayout, equal: isEqaul(layout, localLayout)})
         if(!isEqaul(layout, localLayout)){
             dispatch(updateLayoutConfig(layout))
         }
@@ -95,14 +96,29 @@ function GridContainer(params: GridContainerParams) {
         onDragStop={(i) => handleMove(i)}
       >
          { layout.map(item => {
-            const source = imageList.find((i) => i.id === item.i );
-            return (
-            <Grid key={item.i} sx={{minWidth: 100, minHeight: 100}}>
-                <GridItemMenu handleDelete={handleDelete} handleRearrange={handleRearrange} elementId={item.i}>
-                   <img width="100%" src={source?.img} alt={source?.title}/>
-                </GridItemMenu>
-            </Grid>
-          )})}
+            // TODO- find another solution for determining type of element in config
+            if(item.i.split('-')[0] !== ELEMENT_TYPES.TEXT) {
+                const source = imageList.find((i) => i.id === item.i );
+                return (
+                <Grid key={item.i} sx={{minWidth: 100, minHeight: 100}}>
+                    <GridItemMenu handleDelete={handleDelete} handleRearrange={handleRearrange} elementId={item.i}>
+                       <img width="100%" src={source?.img} alt={source?.title}/>
+                    </GridItemMenu>
+                </Grid>
+                )
+            } else {
+                /// Text Element
+                //TO DO: move to factory function when need to support more element types
+                return (
+                <Grid key={item.i} sx={{minWidth: 200, minHeight: 100}}>
+                    <GridItemMenu handleDelete={handleDelete} handleRearrange={handleRearrange} elementId={item.i}>
+                        <Textarea minRows={2} variant="plain" placeholder="Add Text Here" sx={{width:'100%', height: '100%', fontSize:40, backgroundColor:'transparent', '.MuiTextarea-textarea': {textAlign: 'center'}}} />
+                    </GridItemMenu>
+                </Grid>
+                )
+            }
+
+          })}
         </GridLayout>
     </Grid>
 

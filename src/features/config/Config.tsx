@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
-import { Autocomplete, Divider, Grid, TextField, Typography } from '@mui/material';
+import { Autocomplete, Button, Divider, Grid, TextField, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectBackgroundColor, selectMargin, selectSize, setBackgroundColorConfig, setMarginConfig, setSizeConfig } from './configSlice';
+import { addTextToLayoutConfig, selectBackgroundColor, selectMargin, selectSize, setBackgroundColorConfig, setMarginConfig, setSizeConfig } from './configSlice';
 import ColorPicker from './ColorPicker';
 import PhotoGallery from './PhotoGallery';
 
@@ -52,6 +52,11 @@ function  Config() {
     }
   }, [])
 
+  //Text Element
+  const addTextElement = () => {
+    dispatch(addTextToLayoutConfig())
+  }
+
   return (
     <Grid container  display="flex" flexDirection="column" flexWrap="nowrap" sx={{width:'100%', height:'100vh', borderLeft: '1px solid grey', overflowY: 'scroll', overflowX: 'hidden'}}>
         <Grid item display="flex" justifyContent="center" alignItems="center" sx={{mt:2}}>        
@@ -93,6 +98,15 @@ function  Config() {
             <Typography color='grey' variant="body1">Images</Typography>
         </Grid>
         <PhotoGallery />
+        <Divider sx={{m:1}}/>
+        <Grid item display="flex" justifyContent="flex-start" alignItems="center" sx={{mt:1, ml: 3}}>        
+            <Typography color='grey' variant="body1">Text Element</Typography>
+        </Grid>
+        <Grid display="flex" justifyContent="center" alignItems="center">
+            <Button variant="outlined" color="inherit" onClick={() => addTextElement()} sx={{width: '80%', color: 'grey !important'}}>
+                Add Text Element
+            </Button>
+        </Grid>
     </Grid>
   );
 }
