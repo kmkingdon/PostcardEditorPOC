@@ -27,7 +27,9 @@ https://github.com/kmkingdon/PostcardEditorPOC/assets/32685092/d1cd88d7-268b-430
 - **Resize and Elemement Buttons**- Show resize and Delete/Rearrange buttons on hover or selection. 
 - **Address Defects**- Address defects like the 'readOnly' Typeerror caused by rage clicking on an element. Test for and address additional defects. 
 
-2. Performance: Improve overall App and GridLayout performance. In particular, the Grid Layout is re-rendering whenever the layout changes. Optimizations could improve the number of re-renders and help support larger scale projects like multi-page books. 
+2. Performance and Productionalize code
+- Improve overall App and GridLayout performance. In particular, the Grid Layout is re-rendering whenever the layout changes. Optimizations could improve the number of re-renders and help support larger scale projects like multi-page books.
+- Update/import types, add linter/prettier configs, and reduce duplication.
 
 3. Project Config: Project configs could be saved to enable opening projects later. The config will also need to work for printing. The final "postcard" or project will need to be in a format that is accepted by the printers and is performant for large number of pages (ie. PDF, JPEG, etc). The configuration should be shared between the FE editor and the service that creates the print version.
    
