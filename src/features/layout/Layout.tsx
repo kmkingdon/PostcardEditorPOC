@@ -23,6 +23,15 @@ const postcardMarginSizes: { [key: string]: string} =  {
     "1.0''": '96px',
 }
 
+const calculateHeightWidth = (pageSizes: sizeValues, margins: string):{height:number, width: number} => {
+    const {height, width } = pageSizes;
+    const numericHeight = parseInt(height.split('px')[0]);
+    const numericWidth = parseInt(width.split('px')[0]);
+    const numericMargin = parseInt(margins.split('px')[0])*2;
+
+    return {height: numericHeight - numericMargin, width: numericWidth - numericMargin};
+}
+
 
 function Layout() {
 // size is null set to default size
@@ -37,12 +46,15 @@ const marginSize = margin ? postcardMarginSizes[margin] : '0px';
 const backgroundColor = useAppSelector(selectBackgroundColor);
 const background = backgroundColor || '#ffffff';
 
+//calculate grid canvas height/width with margins
+const {height, width} = calculateHeightWidth(pageSize, marginSize)
+
   return (
     <Grid container  display='flex' >
         <Grid item id="pageBackground" sx={{width:'100%', height:'100vh', backgroundColor: 'rgb(189,199,203)'}} display="flex" justifyContent="center" alignItems="center">
             <Grid item id="page" sx={{width:pageSize.width, height:pageSize.height, backgroundColor: background}}>
                 <Grid item id="outsidemMargin" sx={{ height: '100%', padding: marginSize}}>
-                   <GridContainer/>
+                   <GridContainer height={height} width={width}/>
                 </Grid>
             </Grid>
         </Grid>

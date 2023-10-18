@@ -11,7 +11,7 @@ const hoverButtonSX = {
 
 type ColorPickerParams = {
     backgroundColor: string | null;
-    setBackgroundColor: any;
+    setBackgroundColor: (hex: string) => void;
 }
 
 function  ColorPicker(params: ColorPickerParams) {
@@ -41,7 +41,7 @@ function  ColorPicker(params: ColorPickerParams) {
             onClose={handleClose}
             anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'center',
             }}
             >
             <Sketch
