@@ -29,9 +29,11 @@ https://github.com/kmkingdon/PostcardEditorPOC/assets/32685092/d1cd88d7-268b-430
 
 2. Performance: Improve overall App and GridLayout performance. In particular, the Grid Layout is re-rendering whenever the layout changes. Optimizations could improve the number of re-renders and help support larger scale projects like multi-page books. 
 
-3. Project Config: Project configs could be saved to enable opening projects later. The config will also need to work for printing. The final "postcard" or project will need to be in a format that is accepted by the printers (ie. PDF, JPEG, etc). The configuration should be shared between the FE editor and the service that creates the print version. 
+3. Project Config: Project configs could be saved to enable opening projects later. The config will also need to work for printing. The final "postcard" or project will need to be in a format that is accepted by the printers and is performant for large number of pages (ie. PDF, JPEG, etc). The configuration should be shared between the FE editor and the service that creates the print version.
+   
+4. Editor extensibility: Overall, each type of product should be able to be designed with the same grid layout editor. I would work to improve the GridLayout component to be able to support static layouts, additional products, and multiple pages. 
 
-4. Quality: Add unit and component jests tests.
+5. Quality: Add unit and component jests tests.
 
 
 
